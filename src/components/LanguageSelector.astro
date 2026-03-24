@@ -1,15 +1,15 @@
 ---
-import { languages } from '../i18n/ui';
-import { getLangFromUrl } from '../i18n/utils';
+import { languages } from "../i18n/ui";
+import { getLangFromUrl } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const { pathname } = Astro.url;
 
 // Helper to remove the language prefix from the pathname
 const getPathWithoutLang = (path: string) => {
-  const parts = path.split('/');
+  const parts = path.split("/");
   if (parts[1] && Object.keys(languages).includes(parts[1])) {
-    return '/' + parts.slice(2).join('/');
+    return "/" + parts.slice(2).join("/");
   }
   return path;
 };
@@ -18,27 +18,33 @@ const currentPathWithoutLang = getPathWithoutLang(pathname);
 ---
 
 <div class="relative group">
-  <button 
-    class="flex items-center gap-1 text-on-surface-variant dark:text-gray-400 hover:text-primary-container transition-colors font-label uppercase text-sm tracking-widest px-2 py-1 bg-surface-container-high/50 rounded"
+  <button
+    class="flex items-center gap-2 text-on-surface hover:text-primary-container transition-colors font-label uppercase text-sm tracking-widest px-4 py-3 bg-surface-container-high/50 rounded min-h-[48px]"
     aria-label="Select Language"
     aria-haspopup="true"
     aria-expanded="false"
   >
     {lang}
-    <span class="material-symbols-outlined text-sm" aria-hidden="true">language</span>
+    <span class="material-symbols-outlined text-sm" aria-hidden="true"
+      >language</span
+    >
   </button>
-  <div class="absolute right-0 top-full mt-2 w-32 bg-surface-container-high border border-outline/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+  <div
+    class="absolute right-0 top-full mt-2 w-32 bg-surface-container-high border border-outline/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50"
+  >
     <div role="menu" aria-label="Language options">
-      {Object.entries(languages).map(([code, label]) => (
-        <a
-          href={`/${code}${currentPathWithoutLang === '/' ? '' : currentPathWithoutLang}`}
-          class={`block px-4 py-2 text-xs font-mono uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-fixed transition-colors ${lang === code ? 'text-primary-container' : 'text-on-surface'}`}
-          role="menuitem"
-          aria-label={`Switch to ${label}`}
-        >
-          {label}
-        </a>
-      ))}
+      {
+        Object.entries(languages).map(([code, label]) => (
+          <a
+            href={`/${code}${currentPathWithoutLang === "/" ? "" : currentPathWithoutLang}`}
+            class={`block px-6 py-4 text-xs font-mono uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-fixed transition-colors min-h-[48px] flex items-center ${lang === code ? "text-primary-container font-bold" : "text-on-surface"}`}
+            role="menuitem"
+            aria-label={`Switch to ${label}`}
+          >
+            {label}
+          </a>
+        ))
+      }
     </div>
   </div>
 </div>

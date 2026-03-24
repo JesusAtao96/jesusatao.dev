@@ -1,71 +1,85 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const experiences = [
   {
-    date: t('about.exp1.date'),
-    role: t('about.exp1.role'),
-    company: t('about.exp1.company'),
-    active: true
+    date: t("about.exp1.date"),
+    role: t("about.exp1.role"),
+    company: t("about.exp1.company"),
+    active: true,
   },
   {
-    date: t('about.exp2.date'),
-    role: t('about.exp2.role'),
-    company: t('about.exp2.company'),
-    active: false
+    date: t("about.exp2.date"),
+    role: t("about.exp2.role"),
+    company: t("about.exp2.company"),
+    active: false,
   },
   {
-    date: t('about.exp3.date'),
-    role: t('about.exp3.role'),
-    company: t('about.exp3.company'),
-    active: false
+    date: t("about.exp3.date"),
+    role: t("about.exp3.role"),
+    company: t("about.exp3.company"),
+    active: false,
   },
   {
-    date: t('about.exp4.date'),
-    role: t('about.exp4.role'),
-    company: t('about.exp4.company'),
-    active: false
+    date: t("about.exp4.date"),
+    role: t("about.exp4.role"),
+    company: t("about.exp4.company"),
+    active: false,
   },
   {
-    date: t('about.exp5.date'),
-    role: t('about.exp5.role'),
-    company: t('about.exp5.company'),
-    active: false
+    date: t("about.exp5.date"),
+    role: t("about.exp5.role"),
+    company: t("about.exp5.company"),
+    active: false,
   },
   {
-    date: t('about.exp6.date'),
-    role: t('about.exp6.role'),
-    company: t('about.exp6.company'),
-    active: false
-  }
+    date: t("about.exp6.date"),
+    role: t("about.exp6.role"),
+    company: t("about.exp6.company"),
+    active: false,
+  },
 ];
 ---
 
 <section class="py-24 bg-surface-container-lowest" id="about">
   <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-20">
     <div class="space-y-12">
-      <div class="space-y-4">
-        <h2 class="text-4xl font-headline font-bold tracking-tighter">{t('about.title')}</h2>
-        <p class="text-on-surface-variant text-lg leading-relaxed">
-          {t('about.desc')}
+      <div class="space-y-4" data-reveal="fade-up">
+        <h2 class="text-4xl font-headline font-bold tracking-tighter">
+          {t("about.title")}
+        </h2>
+        <p class="text-on-surface/90 text-lg leading-relaxed">
+          {t("about.desc")}
         </p>
       </div>
-      <div class="space-y-8">
-        {experiences.map(exp => (
-          <div class="relative pl-8 border-l border-outline-variant">
-            <div class={`absolute -left-1.5 top-0 w-3 h-3 rounded-full ${exp.active ? 'bg-primary-container' : 'bg-outline-variant'}`}></div>
-            <span class={`${exp.active ? 'text-primary-container' : 'text-on-surface-variant'} font-mono text-xs uppercase mb-1 block`}>{exp.date}</span>
-            <h4 class="text-xl font-bold font-headline">{exp.role}</h4>
-            <p class="text-on-surface-variant text-sm">{exp.company}</p>
-          </div>
-        ))}
+      <div class="space-y-8" data-reveal="stagger">
+        {
+          experiences.map((exp) => (
+            <div class="relative pl-8 border-l border-outline-variant">
+              <span
+                class={`absolute -left-1.5 top-0 w-3 h-3 rounded-full ${exp.active ? "bg-primary-container" : "bg-outline-variant"}`}
+              />
+              <span
+                class={`${exp.active ? "text-primary-container" : "text-on-surface"} font-mono text-xs uppercase mb-1 block`}
+              >
+                {exp.date}
+              </span>
+              <h3 class="text-xl font-bold font-headline text-white">
+                {exp.role}
+              </h3>
+              <p class="text-on-surface opacity-90 text-sm">{exp.company}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
     <div class="relative">
-      <div class="aspect-square bg-surface-container rounded-lg overflow-hidden flex items-center justify-center p-12 lg:sticky lg:top-32">
+      <div
+        class="aspect-square bg-surface-container rounded-lg overflow-hidden flex items-center justify-center p-12 lg:sticky lg:top-32"
+      >
         <!-- Abstract Tech Representation -->
         <div class="grid grid-cols-3 gap-2 w-full h-full opacity-20">
           <div class="bg-primary-container"></div>
@@ -79,9 +93,18 @@ const experiences = [
           <div class="bg-primary-container"></div>
         </div>
         <div class="absolute inset-0 flex items-center justify-center">
-          <div class="text-center p-8 bg-surface/80 backdrop-blur-xl border border-outline/20">
-            <span class="material-symbols-outlined text-6xl text-primary-container mb-4">terminal</span>
-            <p class="text-xs font-mono uppercase tracking-[0.3em] leading-relaxed">System.log("Passionate about performance")</p>
+          <div
+            class="text-center p-8 bg-surface/80 backdrop-blur-xl border border-outline/20"
+          >
+            <span
+              class="material-symbols-outlined text-6xl text-primary-container mb-4"
+              >terminal</span
+            >
+            <p
+              class="text-xs font-mono uppercase tracking-[0.3em] leading-relaxed"
+            >
+              System.log("Passionate about performance")
+            </p>
           </div>
         </div>
       </div>

@@ -1,43 +1,62 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const technologies = [
-  { name: 'Vue 3 / Nuxt', icon: 'widgets' },
-  { name: 'Angular', icon: 'layers' },
-  { name: 'React.js', icon: 'rebase_edit' },
-  { name: 'TypeScript', icon: 'code_off' },
-  { name: 'Microfrontends', icon: 'hub' },
-  { name: 'Tailwind CSS', icon: 'format_paint' },
+  { name: "Vue 3 / Nuxt", icon: "widgets" },
+  { name: "Angular", icon: "layers" },
+  { name: "React.js", icon: "rebase_edit" },
+  { name: "TypeScript", icon: "code_off" },
+  { name: "Microfrontends", icon: "hub" },
+  { name: "Tailwind CSS", icon: "format_paint" },
 ];
 ---
 
 <section class="py-24 bg-surface-container-low">
   <div class="max-w-7xl mx-auto px-8">
-    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-      <div class="max-w-xl">
-        <h2 class="font-headline font-bold tracking-tighter mb-4 text-4xl">{t('tech.title')}</h2>
-        <p class="text-on-surface-variant">{t('tech.subtitle')}</p>
+    <div
+      class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4"
+    >
+      <div class="max-w-xl" data-reveal="fade-up">
+        <h2 class="font-headline font-bold tracking-tighter mb-4 text-4xl">
+          {t("tech.title")}
+        </h2>
+        <p class="text-on-surface/90">{t("tech.subtitle")}</p>
       </div>
-      <div class="text-primary-container font-mono text-sm tracking-widest hidden md:block">
-        BUILD_VERSION: 2.0.4
+      <div
+        class="text-primary-container font-mono text-sm tracking-widest hidden md:block"
+      >
+        BUILD_VERSION: 1.0.0
       </div>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-      {technologies.map(tech => (
-        <div class="bg-surface p-8 flex flex-col items-center gap-4 hover:bg-surface-container-high transition-colors group">
-          <span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-primary-container transition-colors font-variation-settings-fill-0">{tech.icon}</span>
-          <span class="font-label text-sm uppercase tracking-widest text-on-surface-variant text-center">{tech.name}</span>
-        </div>
-      ))}
+    <div
+      class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"
+      data-reveal="stagger"
+    >
+      {
+        technologies.map((tech) => (
+          <div class="bg-surface p-8 flex flex-col items-center gap-4 hover:bg-surface-container-high transition-colors group">
+            <span class="material-symbols-outlined text-4xl text-on-surface/90 group-hover:text-primary-container transition-colors font-variation-settings-fill-0" aria-hidden="true">
+              {tech.icon}
+            </span>
+            <span class="font-label text-sm uppercase tracking-widest text-on-surface/90 text-center">
+              {tech.name}
+            </span>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
-    .font-variation-settings-fill-0 {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
+  .font-variation-settings-fill-0 {
+    font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
+  }
 </style>

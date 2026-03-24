@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "gsap-scrolltrigger": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "computedHash": "1cdc5647693783cb7a662d84a5de434c88a051ed56b4d33597c9b5782b5973e6"
+    }
+  }
+}

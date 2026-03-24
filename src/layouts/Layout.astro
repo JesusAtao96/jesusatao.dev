@@ -1,42 +1,130 @@
 ---
-import '../styles/global.css';
-import { getLangFromUrl } from '../i18n/utils';
+import "../styles/global.css";
+import profileImg from "../assets/images/profile-hero.jpg";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 interface Props {
-	title: string;
-    description?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
 }
 
-const { title, description = "Digital solution architect portfolio" } = Astro.props;
+const {
+  title: propsTitle,
+  description: propsDescription,
+  image = "/og-image.png",
+  canonicalURL = Astro.url.href,
+} = Astro.props;
+
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const title = propsTitle || t("seo.ogTitle");
+const description = propsDescription || t("seo.description");
+
+// Construct absolute URL for OG image if it's relative
+const ogImageUrl = new URL(image, Astro.url.origin).href;
+
+// Multi-language alternates for SEO
+const alternates = [
+  { lang: "es", href: new URL("/es/", Astro.url.origin).href },
+  { lang: "en", href: new URL("/en/", Astro.url.origin).href },
+  { lang: "pt", href: new URL("/pt/", Astro.url.origin).href },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Jesús Alejandro Atao Janampa",
+  jobTitle: "Frontend Developer",
+  url: Astro.url.origin,
+  sameAs: ["https://github.com/jesusatao", "https://linkedin.com/in/jesusatao"],
+  knowsAbout: [
+    "Angular",
+    "React",
+    "Vue.js",
+    "Nuxt.js",
+    "Node.js",
+    "Microfrontends",
+    "Web Performance",
+    "Accessibility",
+  ],
+};
 ---
 
 <!doctype html>
-<html lang={lang} class="dark">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		
-		<!-- Performance: Preconnect to font domains -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		
-		<!-- Performance: Optimize font loading with display=swap -->
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-	</head>
-	<body class="font-body selection:bg-primary-container selection:text-on-primary-fixed bg-surface dark:bg-[#0a0a0a]">
-		<!-- Accessibility: Skip to main content -->
-		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary-container text-on-primary-fixed px-4 py-2 z-[100] rounded-md">
-			Skip to content
-		</a>
-		<main id="main-content">
-			<slot />
-		</main>
-	</body>
+<html lang={lang} class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- SEO: Multilingual Alternates -->
+    {
+      alternates.map((alt) => (
+        <link rel="alternate" hreflang={alt.lang} href={alt.href} />
+      ))
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL("/es/", Astro.url.origin).href}
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImageUrl} />
+
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <!-- Performance: Preload hero image for LCP -->
+    <link rel="preload" as="image" href={profileImg.src} />
+
+    <!-- Performance: Optimize font loading with display=swap -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="font-body selection:bg-primary-container selection:text-on-primary-fixed bg-surface dark:bg-[#0a0a0a]"
+  >
+    <!-- Accessibility: Skip to main content -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary-container text-on-primary-fixed px-4 py-2 z-[100] rounded-md"
+    >
+      Skip to content
+    </a>
+    <!-- SEO: Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <script>
+      import { initAnimations } from "../scripts/animations";
+      // Initialize animations on load
+      document.addEventListener("DOMContentLoaded", initAnimations);
+    </script>
+  </body>
 </html>
