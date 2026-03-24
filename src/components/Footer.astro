@@ -1,0 +1,22 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const year = new Date().getFullYear();
+---
+
+<footer class="w-full py-12 mt-24 bg-surface dark:bg-[#131313]">
+  <div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-4">
+    <div class="text-lg font-bold text-on-surface dark:text-white font-headline">
+      Jesús Atao<span class="text-primary-container">.</span>
+    </div>
+    <div class="text-on-surface-variant opacity-60 font-body text-sm tracking-normal">
+      © {year} Jesús Alejandro Atao Janampa. Built with Precision.
+    </div>
+    <div class="flex gap-6">
+      <a class="text-on-surface-variant opacity-60 hover:opacity-100 hover:text-[#00FF41] transition-opacity font-body text-sm" href="https://github.com/JesusAtao96" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="text-on-surface-variant opacity-60 hover:opacity-100 hover:text-[#00FF41] transition-opacity font-body text-sm" href="https://linkedin.com/in/jesus-atao" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a class="text-on-surface-variant opacity-60 hover:opacity-100 hover:text-[#00FF41] transition-opacity font-body text-sm" href="https://github.com/JesusAtao96/portafolio" target="_blank" rel="noopener noreferrer">Source</a>
+    </div>
+  </div>
+</footer>

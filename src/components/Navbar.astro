@@ -1,0 +1,53 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import LanguageSelector from './LanguageSelector.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<header class="fixed top-0 w-full z-50 bg-surface/60 dark:bg-[#131313]/60 backdrop-blur-xl border-b border-outline/5">
+  <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto" aria-label="Main Navigation">
+    <div class="text-xl font-headline font-bold tracking-tighter text-on-surface dark:text-white">
+      Jesús Atao<span class="text-primary-container">.</span>
+    </div>
+    <div class="hidden md:flex gap-8 items-center" role="menubar">
+      <a class="text-on-surface-variant dark:text-gray-400 hover:text-primary-container transition-colors font-label text-sm uppercase tracking-widest" href="#projects" role="menuitem">{t('nav.projects')}</a>
+      <a class="text-on-surface-variant dark:text-gray-400 hover:text-primary-container transition-colors font-label text-sm uppercase tracking-widest" href="#about" role="menuitem">{t('nav.about')}</a>
+      <a class="text-on-surface-variant dark:text-gray-400 hover:text-primary-container transition-colors font-label text-sm uppercase tracking-widest" href="#contact" role="menuitem">{t('nav.contact')}</a>
+      
+      <div class="h-4 w-[1px] bg-outline/20 mx-2" aria-hidden="true"></div>
+      
+      <LanguageSelector />
+
+      <a href="/cv.pdf" class="bg-primary-container text-on-primary-fixed px-5 py-1.5 font-bold font-label text-sm uppercase tracking-wider scale-95 active:scale-90 transition-transform decoration-none" aria-label={t('nav.resume')}>
+        {t('nav.resume')}
+      </a>
+    </div>
+    <button class="md:hidden text-on-surface" id="menu-toggle" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </nav>
+  
+  <!-- Mobile Menu (Hidden by default) -->
+  <div id="mobile-menu" class="hidden md:hidden bg-surface-container p-8 border-b border-outline/10 space-y-6">
+    <a class="block text-on-surface-variant text-lg font-label uppercase tracking-widest" href="#projects">{t('nav.projects')}</a>
+    <a class="block text-on-surface-variant text-lg font-label uppercase tracking-widest" href="#about">{t('nav.about')}</a>
+    <a class="block text-on-surface-variant text-lg font-label uppercase tracking-widest" href="#contact">{t('nav.contact')}</a>
+    <div class="flex items-center justify-between pt-4 border-t border-outline/10">
+        <LanguageSelector />
+        <button class="bg-primary-container text-on-primary-fixed px-5 py-2 font-bold font-label text-sm uppercase tracking-wider">
+            {t('nav.resume')}
+        </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>

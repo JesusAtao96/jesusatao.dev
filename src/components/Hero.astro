@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section
+  class="min-h-screen flex flex-col justify-center px-8 max-w-7xl mx-auto pt-20"
+>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-7 space-y-6">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high border-l-2 border-primary-container"
+      >
+        <span
+          class="text-primary-container font-mono text-xs tracking-widest uppercase"
+          >{t("hero.status")}</span
+        >
+      </div>
+      <h1
+        class="text-5xl md:text-8xl font-headline font-bold tracking-tighter leading-none"
+      >
+        {t("hero.title")}
+        <br />
+        <span class="text-primary-container terminal-cursor">Developer</span>
+      </h1>
+      <p
+        class="text-on-surface-variant text-lg md:text-xl max-w-xl leading-relaxed"
+      >
+        {t("hero.subtitle")}
+      </p>
+      <div class="flex gap-4 pt-4">
+        <a
+          href="#projects"
+          class="bg-primary-container text-on-primary-fixed px-8 py-3 font-bold font-label tracking-wide flex items-center gap-2 hover:brightness-110 transition-all decoration-none"
+          aria-label={t("hero.cta")}
+        >
+          {t("hero.cta")}
+          <span class="material-symbols-outlined text-sm" aria-hidden="true"
+            >arrow_downward</span
+          >
+        </a>
+      </div>
+    </div>
+    <div class="lg:col-span-5 relative group">
+      <div
+        class="absolute -inset-4 bg-primary-container/10 blur-3xl rounded-full group-hover:bg-primary-container/20 transition-all duration-700"
+      >
+      </div>
+      <div
+        class="relative aspect-square overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 rounded-lg"
+      >
+        <Image
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFfIz_W0BhrDATAsEN5992GxGumDHbsAcnx6ALhX6GLMLEi3Sip35Hm97scCIY1Ao6MtLf-EX8WepT7MdHBTt05RjVLX4t47SLSIruFmv-Kd_1xERSRcdYTbWajfoC02uUm9eJ7dUMTcXjaNLYQSbnpWPxJd0LRmFhWzINTZh27O6MsoBnH0ZXOCUUHc-jZ5Q4es0K-EbtdgfNeTnfHd296Upe5PtuIrrsO8Of5caWJ3WdKvllXGFimDfRuEIrOiVHqiW4u_F5cfad"
+          alt={`Professional portrait of Jesús Atao, ${t("hero.status")}`}
+          width={500}
+          height={500}
+          class="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <div class="absolute -bottom-6 -right-6 glass-card p-6 hidden md:block">
+        <div class="flex flex-col gap-1">
+          <span class="text-primary-container font-mono text-2xl font-bold"
+            >+5 Años</span
+          >
+          <span
+            class="text-on-surface-variant text-xs uppercase tracking-tighter"
+            >{t("hero.experience")}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

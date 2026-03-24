@@ -1,0 +1,58 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="py-24 max-w-7xl mx-auto px-8" id="contact">
+    <div class="bg-surface-container p-8 md:p-16 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/5 blur-[100px]" aria-hidden="true"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+            <div>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold tracking-tighter mb-6">{t('contact.title')}</h2>
+                <p class="text-on-surface-variant mb-12 text-lg">{t('contact.desc')}</p>
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-surface-container-high flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary-container" aria-hidden="true">mail</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-on-surface-variant uppercase font-mono">{t('contact.email_label')}</p>
+                            <p class="font-bold">atao.jesus@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-surface-container-high flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary-container" aria-hidden="true">location_on</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-on-surface-variant uppercase font-mono">{t('contact.location_label')}</p>
+                            <p class="font-bold">{t('contact.location_value')}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="space-y-6" aria-labelledby="contact-form-title">
+                <h3 id="contact-form-title" class="sr-only">Formulario de contacto</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label for="name" class="text-xs font-mono uppercase tracking-widest text-on-surface-variant">{t('contact.form_name')}</label>
+                        <input id="name" name="name" class="w-full bg-surface-container-lowest border-none border-b-2 border-transparent focus:border-primary-container focus:ring-0 transition-all p-4 text-on-surface" placeholder={t('contact.form_name_placeholder')} type="text" required aria-required="true"/>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="email" class="text-xs font-mono uppercase tracking-widest text-on-surface-variant">{t('contact.form_email')}</label>
+                        <input id="email" name="email" class="w-full bg-surface-container-lowest border-none border-b-2 border-transparent focus:border-primary-container focus:ring-0 transition-all p-4 text-on-surface" placeholder={t('contact.form_email_placeholder')} type="email" required aria-required="true"/>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label for="message" class="text-xs font-mono uppercase tracking-widest text-on-surface-variant">{t('contact.form_message')}</label>
+                    <textarea id="message" name="message" class="w-full bg-surface-container-lowest border-none border-b-2 border-transparent focus:border-primary-container focus:ring-0 transition-all p-4 text-on-surface" placeholder={t('contact.form_message_placeholder')} rows="4" required aria-required="true"></textarea>
+                </div>
+                <button class="w-full bg-primary-container text-on-primary-fixed py-4 font-bold font-label uppercase tracking-widest hover:brightness-110 transition-all" type="submit">
+                    {t('contact.form_send')}
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
