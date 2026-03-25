@@ -1,33 +1,33 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Navbar from '../../components/Navbar.astro';
-import Hero from '../../components/Hero.astro';
-import TechStack from '../../components/TechStack.astro';
-import Projects from '../../components/Projects.astro';
-import Experience from '../../components/Experience.astro';
-import Contact from '../../components/Contact.astro';
-import Footer from '../../components/Footer.astro';
-import { languages } from '../../i18n/ui';
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Hero from "../../components/Hero.astro";
+import TechStack from "../../components/TechStack.astro";
+import Projects from "../../components/Projects.astro";
+import Experience from "../../components/Experience.astro";
+import Contact from "../../components/Contact.astro";
+import Footer from "../../components/Footer.astro";
+import { languages } from "../../i18n/ui";
 
 export function getStaticPaths() {
   return [
-    { params: { lang: 'es' } },
-    { params: { lang: 'en' } },
-    { params: { lang: 'pt' } },
+    { params: { lang: "es" } },
+    { params: { lang: "en" } },
+    { params: { lang: "pt" } },
   ];
 }
 
 const { lang } = Astro.params;
 ---
 
-<Layout title="DevPortfolio | Fullstack Developer">
-	<Navbar />
-	<main>
-		<Hero />
-		<TechStack />
-		<Projects />
-		<Experience />
-		<Contact />
-	</main>
-	<Footer />
+<Layout title="Jesús Atao - Frontend Developer">
+  <Navbar />
+  <main>
+    <Hero />
+    <TechStack />
+    <Projects />
+    <Experience />
+    <Contact />
+  </main>
+  <Footer />
 </Layout>

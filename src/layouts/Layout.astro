@@ -20,7 +20,9 @@ const {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const title = propsTitle ? `${propsTitle} - Jesús Atao` : t("seo.title");
+const title = propsTitle && !propsTitle.includes("Jesús Atao") 
+  ? `${propsTitle} - Jesús Atao` 
+  : (propsTitle || t("seo.title"));
 const description = propsDescription || t("seo.description");
 
 // Construct absolute URL for OG image if it's relative
