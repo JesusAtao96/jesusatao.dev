@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jesus-atao.vercel.app',
+  site: 'https://jesusatao.dev',
   vite: {
     plugins: [tailwindcss()]
   },

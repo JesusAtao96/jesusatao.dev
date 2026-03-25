@@ -13,7 +13,7 @@ interface Props {
 const {
   title: propsTitle,
   description: propsDescription,
-  image = profileImg.src,
+  image = "/og-image.jpg",
   canonicalURL = Astro.url.href,
 } = Astro.props;
 
@@ -26,7 +26,7 @@ const title = propsTitle && !propsTitle.includes("Jesús Atao")
 const description = propsDescription || t("seo.description");
 
 // Construct absolute URL for OG image if it's relative
-const ogImageUrl = new URL(image, Astro.url.origin).href;
+const ogImageUrl = new URL(image, Astro.site || Astro.url.origin).href;
 
 // Multi-language alternates for SEO
 const alternates = [
