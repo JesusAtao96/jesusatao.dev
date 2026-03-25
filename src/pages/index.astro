@@ -1,4 +1,10 @@
 ---
+import Layout from '../layouts/Layout.astro';
 import { defaultLang } from '../i18n/ui';
+
+const canonicalURL = new URL(`/${defaultLang}/`, Astro.site || Astro.url.origin).href;
 ---
-<meta http-equiv="refresh" content={`0;url=/${defaultLang}/`} />
+
+<Layout canonicalURL={canonicalURL}>
+    <meta http-equiv="refresh" content={`0;url=/${defaultLang}/`} />
+</Layout>
