@@ -13,14 +13,14 @@ interface Props {
 const {
   title: propsTitle,
   description: propsDescription,
-  image = "/og-image.png",
+  image = profileImg.src,
   canonicalURL = Astro.url.href,
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const title = propsTitle || t("seo.ogTitle");
+const title = propsTitle ? `${propsTitle} - Jesús Atao` : t("seo.title");
 const description = propsDescription || t("seo.description");
 
 // Construct absolute URL for OG image if it's relative
@@ -58,7 +58,10 @@ const jsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="Jesús Alejandro Atao Janampa" />
+    <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
 
