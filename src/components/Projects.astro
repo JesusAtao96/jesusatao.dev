@@ -5,143 +5,107 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Representative URLs from the UI context or placeholders that will be optimized by Astro
-const img1 =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuBGjf7Y6yZJB3RV8eC9auz9lKtoZc4-L_aL5wLhBUHK3WyPYdLm_qvmFLCemTLfECxyPL-zELs57yBoUNQKBDnREiZISWUvsABsiT2_U7JD47u31CBi2ABblk0BxkfjgfAVvk-eU_BD1-SW9eK3on1JbQJV2YIotLJ-jHI5s0o9AiwfLdcQC2DJ1Bd_poPi16K1oP-O8kzlezegRycUJraTwCe9IMo-EN2goJQy9HVaP7-0IFw6_LFKZazbahAK9KZquiBukyPhBawX";
-const img2 =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAvZBpATW0PyB11OuuTyb4TqMcTfA_a6JnxUMP-JH0C1aMRziQkhwNJAzPGzgpXGPMEFb0CWJhSHNDEzgBDXqwTo73KItaMbGvDflhok-nBuqgBwwxlgB6gzoKJvOEVEdPMI8tZp01ESLvA3o-QWfhRfV6UlOX-ui0Ss7j5P_1LlIMV4KROGAlqNFBXxGnLA2c1BAOMLVDYI2UIKcSGwzRgd1fNk4HWWSRDTfP-h9orD9NWBMLudehfIpRcQ6vWXM6CP6AAFgYxD8dP";
+const img1 = "https://lh3.googleusercontent.com/aida-public/AB6AXuBGjf7Y6yZJB3RV8eC9auz9lKtoZc4-L_aL5wLhBUHK3WyPYdLm_qvmFLCemTLfECxyPL-zELs57yBoUNQKBDnREiZISWUvsABsiT2_U7JD47u31CBi2ABblk0BxkfjgfAVvk-eU_BD1-SW9eK3on1JbQJV2YIotLJ-jHI5s0o9AiwfLdcQC2DJ1Bd_poPi16K1oP-O8kzlezegRycUJraTwCe9IMo-EN2goJQy9HVaP7-0IFw6_LFKZazbahAK9KZquiBukyPhBawX";
+const img2 = "https://lh3.googleusercontent.com/aida-public/AB6AXuAvZBpATW0PyB11OuuTyb4TqMcTfA_a6JnxUMP-JH0C1aMRziQkhwNJAzPGzgpXGPMEFb0CWJhSHNDEzgBDXqwTo73KItaMbGvDflhok-nBuqgBwwxlgB6gzoKJvOEVEdPMI8tZp01ESLvA3o-QWfhRfV6UlOX-ui0Ss7j5P_1LlIMV4KROGAlqNFBXxGnLA2c1BAOMLVDYI2UIKcSGwzRgd1fNk4HWWSRDTfP-h9orD9NWBMLudehfIpRcQ6vWXM6CP6AAFgYxD8dP";
+import img3 from "../assets/images/ethereal-studio.png";
+import img4 from "../assets/images/hiring-portal.png";
+
+interface Project {
+  id: string;
+  title: string;
+  desc: string;
+  img: any;
+  tags: string[];
+  link: string;
+}
+
+const projects: Project[] = [
+  {
+    id: "01",
+    title: t("projects.nexus.title"),
+    desc: t("projects.nexus.desc"),
+    img: img1,
+    tags: t("projects.nexus.tags").split(", "),
+    link: "#",
+  },
+  {
+    id: "02",
+    title: t("projects.luxe.title"),
+    desc: t("projects.luxe.desc"),
+    img: img2,
+    tags: t("projects.luxe.tags").split(", "),
+    link: "#",
+  },
+  {
+    id: "03",
+    title: t("projects.ether.title"),
+    desc: t("projects.ether.desc"),
+    img: img3,
+    tags: t("projects.ether.tags").split(", "),
+    link: "#",
+  },
+  {
+    id: "04",
+    title: t("projects.hiring.title"),
+    desc: t("projects.hiring.desc"),
+    img: img4,
+    tags: t("projects.hiring.tags").split(", "),
+    link: "#",
+  }
+];
 ---
 
-<section class="py-24 max-w-7xl mx-auto px-8" id="projects">
-  <h2
-    class="text-4xl font-headline font-bold tracking-tighter mb-16"
-    data-reveal="fade-up"
-  >
-    {t("projects.title")}
-  </h2>
-  <div
-    class="grid grid-cols-1 md:grid-cols-12 md:grid-rows-2 gap-6 min-h-[900px]"
-    data-reveal="stagger"
-  >
-    <!-- Project 1: Large Bento Item -->
-    <div
-      class="md:col-span-8 md:row-span-1 glass-card relative overflow-hidden group"
-    >
-      <div
-        class="absolute inset-0 w-full h-full opacity-40 group-hover:scale-105 transition-transform duration-700"
+<section class="py-24 max-w-7xl mx-auto px-8 sm:px-12" id="projects">
+  <header class="mb-16" data-reveal="fade-up">
+    <h2 class="text-4xl font-headline font-bold tracking-tighter mb-4">
+      {t("projects.title")}
+    </h2>
+    <p class="text-on-surface/90 text-lg leading-relaxed max-w-2xl">
+      {t("projects.subtitle")}
+    </p>
+  </header>
+
+  <div class="flex flex-col gap-24 sm:gap-32">
+    {projects.map((project, index) => (
+      <article 
+        class="group grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center"
+        data-reveal="fade-up"
       >
-        <Image
-          src={img1}
-          alt={t("projects.nexus.title")}
-          width={800}
-          height={450}
-          class="w-full h-full object-cover"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div
-        class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"
-      >
-      </div>
-      <div class="absolute bottom-0 p-8 w-full">
-        <div class="flex justify-between items-end">
-          <div>
-            <span
-              class="font-mono text-primary-container text-xs mb-2 block uppercase tracking-widest"
-              >{t("projects.nexus.category")}</span
-            >
-            <h3 class="text-3xl font-headline font-bold mb-2">
-              {t("projects.nexus.title")}
+        <div class="order-2 lg:order-1">
+          <header class="mb-6">
+            <span class="font-mono text-primary-container text-[10px] mb-3 block uppercase tracking-[0.2em] font-bold">
+              {t("projects.case_study")} #{project.id}
+            </span>
+            <h3 class="text-3xl sm:text-4xl font-headline font-bold mb-4 tracking-tight group-hover:text-primary-container transition-colors duration-300">
+              {project.title}
             </h3>
-            <p class="text-on-surface/90 max-w-md">
-              {t("projects.nexus.desc")}
-            </p>
-          </div>
-          <button
-            class="bg-white/10 backdrop-blur-md p-3 hover:bg-primary-container hover:text-on-primary-fixed transition-all"
-            aria-label={`View ${t("projects.nexus.title")}`}
-          >
-            <span class="material-symbols-outlined" aria-hidden="true">north_east</span>
-          </button>
+            <div class="flex flex-wrap gap-2 mb-6">
+              {project.tags.map(tag => (
+                <span class="px-3 py-1 rounded-full border border-outline/20 text-[10px] font-mono tracking-widest uppercase text-on-surface/70">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </header>
+          
+          <p class="text-on-surface/80 text-base leading-relaxed max-w-xl">
+            {project.desc}
+          </p>
         </div>
-      </div>
-    </div>
 
-    <!-- Project 2: Vertical Small -->
-    <div
-      class="md:col-span-4 md:row-span-2 bg-surface-container-low flex flex-col justify-between p-8 border-l-2 border-primary-container/20 group hover:border-primary-container transition-all"
-    >
-      <div>
-        <span
-          class="font-mono text-primary-container text-xs mb-4 block uppercase tracking-widest"
-          >{t("projects.luxe.category")}</span
-        >
-        <h3 class="text-2xl font-headline font-bold mb-4 leading-tight">
-          {t("projects.luxe.title")}
-        </h3>
-        <p class="text-on-surface/90 mb-8">{t("projects.luxe.desc")}</p>
-      </div>
-      <div
-        class="relative h-64 overflow-hidden rounded bg-surface-container-high"
-      >
-        <Image
-          src={img2}
-          alt={t("projects.luxe.title")}
-          width={400}
-          height={600}
-          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-    </div>
-
-    <!-- Project 3: Medium Horizontal -->
-    <div
-      class="md:col-span-4 md:row-span-1 bg-surface-container-high p-8 flex flex-col justify-between hover:bg-surface-variant transition-all"
-    >
-      <div>
-        <span
-          class="font-mono text-primary-container text-xs mb-2 block uppercase tracking-widest"
-          >{t("projects.ether.category")}</span
-        >
-        <h3 class="text-2xl font-headline font-bold mb-2">
-          {t("projects.ether.title")}
-        </h3>
-      </div>
-      <p class="text-on-surface/90 text-sm mb-6">
-        {t("projects.ether.desc")}
-      </p>
-      <div class="flex gap-2">
-        <span
-          class="px-2 py-1 bg-surface text-[10px] font-mono border border-outline/20 uppercase tracking-widest"
-          >Web3</span
-        >
-        <span
-          class="px-2 py-1 bg-surface text-[10px] font-mono border border-outline/20 uppercase tracking-widest"
-          >Dapp</span
-        >
-      </div>
-    </div>
-
-    <!-- Project 4: Large Promo Item -->
-    <div
-      class="md:col-span-4 md:row-span-1 bg-primary-container text-on-primary-fixed p-8 flex flex-col justify-between group"
-    >
-      <h3
-        class="text-3xl font-headline font-bold leading-none italic group-hover:not-italic transition-all"
-      >
-        {t("projects.more")}
-      </h3>
-      <div class="flex justify-between items-center">
-        <span class="text-xs font-mono uppercase font-bold"
-          >{t("projects.github")}</span
-        >
-        <span class="material-symbols-outlined text-4xl" aria-hidden="true"
-          >trending_flat</span
-        >
-      </div>
-    </div>
+        <div class="order-1 lg:order-2 relative aspect-[16/9] overflow-hidden rounded-sm bg-surface-container-high">
+          <Image
+            src={project.img}
+            alt={project.title}
+            width={1200}
+            height={675}
+            class="w-full h-full object-cover grayscale-[0.2] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none"></div>
+        </div>
+      </article>
+    ))}
   </div>
 </section>

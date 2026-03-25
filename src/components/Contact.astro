@@ -56,10 +56,14 @@ const t = useTranslations(lang);
         </div>
       </div>
       <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
         class="space-y-6"
         aria-labelledby="contact-form-title"
         data-reveal="fade-up"
       >
+        <input type="hidden" name="form-name" value="contact" />
         <h3 id="contact-form-title" class="sr-only">Formulario de contacto</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">

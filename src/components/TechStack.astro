@@ -4,13 +4,29 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+import { Image } from "astro:assets";
+import vueIcon from "../assets/icons/vue.svg";
+import angularIcon from "../assets/icons/angular-icon.svg";
+import reactIcon from "../assets/icons/react.svg";
+import typescriptIcon from "../assets/icons/typescript-icon.svg";
+import tailwindIcon from "../assets/icons/tailwindcss-icon.svg";
+import jestIcon from "../assets/icons/jest.svg";
+import ionicIcon from "../assets/icons/ionic-icon.svg";
+import nodejsIcon from "../assets/icons/nodejs-icon.svg";
+import sassIcon from "../assets/icons/sass.svg";
+import vitestIcon from "../assets/icons/vitest.svg";
+
 const technologies = [
-  { name: "Vue 3 / Nuxt", icon: "widgets" },
-  { name: "Angular", icon: "layers" },
-  { name: "React.js", icon: "rebase_edit" },
-  { name: "TypeScript", icon: "code_off" },
-  { name: "Microfrontends", icon: "hub" },
-  { name: "Tailwind CSS", icon: "format_paint" },
+  { name: "Vue 3 / Nuxt", icon: vueIcon },
+  { name: "Angular", icon: angularIcon },
+  { name: "React.js", icon: reactIcon },
+  { name: "TypeScript", icon: typescriptIcon },
+  { name: "Tailwind CSS", icon: tailwindIcon },
+  { name: "Node.js", icon: nodejsIcon },
+  { name: "Jest", icon: jestIcon },
+  { name: "Vitest", icon: vitestIcon },
+  { name: "Ionic", icon: ionicIcon },
+  { name: "Sass", icon: sassIcon },
 ];
 ---
 
@@ -20,7 +36,7 @@ const technologies = [
       class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4"
     >
       <div class="max-w-xl" data-reveal="fade-up">
-        <h2 class="font-headline font-bold tracking-tighter mb-4 text-4xl">
+        <h2 class="font-headline font-bold tracking-tighter mb-4 text-4xl lg:text-5xl">
           {t("tech.title")}
         </h2>
         <p class="text-on-surface/90">{t("tech.subtitle")}</p>
@@ -32,16 +48,22 @@ const technologies = [
       </div>
     </div>
     <div
-      class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"
+      class="grid grid-cols-2 lg:grid-cols-5 gap-6"
       data-reveal="stagger"
     >
       {
         technologies.map((tech) => (
-          <div class="bg-surface p-8 flex flex-col items-center gap-4 hover:bg-surface-container-high transition-colors group">
-            <span class="material-symbols-outlined text-4xl text-on-surface/90 group-hover:text-primary-container transition-colors font-variation-settings-fill-0" aria-hidden="true">
-              {tech.icon}
-            </span>
-            <span class="font-label text-sm uppercase tracking-widest text-on-surface/90 text-center">
+          <div class="bg-surface p-8 flex flex-col items-center gap-6 hover:bg-surface-container-high transition-all duration-500 group rounded-3xl border border-white/5 shadow-sm overflow-hidden">
+            <div class="relative w-16 h-16 flex items-center justify-center p-2">
+              <Image
+                src={tech.icon}
+                alt={tech.name}
+                width={64}
+                height={64}
+                class="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out transform group-hover:scale-110"
+              />
+            </div>
+            <span class="font-label text-xs tracking-[0.2em] text-on-surface/60 text-center transition-all duration-300 group-hover:text-primary-container group-hover:translate-y-[-2px]">
               {tech.name}
             </span>
           </div>
@@ -50,13 +72,3 @@ const technologies = [
     </div>
   </div>
 </section>
-
-<style>
-  .font-variation-settings-fill-0 {
-    font-variation-settings:
-      "FILL" 0,
-      "wght" 400,
-      "GRAD" 0,
-      "opsz" 24;
-  }
-</style>
