@@ -5,10 +5,14 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const img1 = "https://lh3.googleusercontent.com/aida-public/AB6AXuBGjf7Y6yZJB3RV8eC9auz9lKtoZc4-L_aL5wLhBUHK3WyPYdLm_qvmFLCemTLfECxyPL-zELs57yBoUNQKBDnREiZISWUvsABsiT2_U7JD47u31CBi2ABblk0BxkfjgfAVvk-eU_BD1-SW9eK3on1JbQJV2YIotLJ-jHI5s0o9AiwfLdcQC2DJ1Bd_poPi16K1oP-O8kzlezegRycUJraTwCe9IMo-EN2goJQy9HVaP7-0IFw6_LFKZazbahAK9KZquiBukyPhBawX";
-const img2 = "https://lh3.googleusercontent.com/aida-public/AB6AXuAvZBpATW0PyB11OuuTyb4TqMcTfA_a6JnxUMP-JH0C1aMRziQkhwNJAzPGzgpXGPMEFb0CWJhSHNDEzgBDXqwTo73KItaMbGvDflhok-nBuqgBwwxlgB6gzoKJvOEVEdPMI8tZp01ESLvA3o-QWfhRfV6UlOX-ui0Ss7j5P_1LlIMV4KROGAlqNFBXxGnLA2c1BAOMLVDYI2UIKcSGwzRgd1fNk4HWWSRDTfP-h9orD9NWBMLudehfIpRcQ6vWXM6CP6AAFgYxD8dP";
-import img3 from "../assets/images/ethereal-studio.png";
-import img4 from "../assets/images/hiring-portal.png";
+const img1 =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuBGjf7Y6yZJB3RV8eC9auz9lKtoZc4-L_aL5wLhBUHK3WyPYdLm_qvmFLCemTLfECxyPL-zELs57yBoUNQKBDnREiZISWUvsABsiT2_U7JD47u31CBi2ABblk0BxkfjgfAVvk-eU_BD1-SW9eK3on1JbQJV2YIotLJ-jHI5s0o9AiwfLdcQC2DJ1Bd_poPi16K1oP-O8kzlezegRycUJraTwCe9IMo-EN2goJQy9HVaP7-0IFw6_LFKZazbahAK9KZquiBukyPhBawX";
+const img2 =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuAvZBpATW0PyB11OuuTyb4TqMcTfA_a6JnxUMP-JH0C1aMRziQkhwNJAzPGzgpXGPMEFb0CWJhSHNDEzgBDXqwTo73KItaMbGvDflhok-nBuqgBwwxlgB6gzoKJvOEVEdPMI8tZp01ESLvA3o-QWfhRfV6UlOX-ui0Ss7j5P_1LlIMV4KROGAlqNFBXxGnLA2c1BAOMLVDYI2UIKcSGwzRgd1fNk4HWWSRDTfP-h9orD9NWBMLudehfIpRcQ6vWXM6CP6AAFgYxD8dP";
+import img3 from "../assets/images/tunkobtc.png";
+import img4 from "../assets/images/challenges.png";
+import img5 from "../assets/images/ai-doc.png";
+import img6 from "../assets/images/uptask.png";
 
 interface Project {
   id: string;
@@ -22,22 +26,6 @@ interface Project {
 const projects: Project[] = [
   {
     id: "01",
-    title: t("projects.nexus.title"),
-    desc: t("projects.nexus.desc"),
-    img: img1,
-    tags: t("projects.nexus.tags").split(", "),
-    link: "#",
-  },
-  {
-    id: "02",
-    title: t("projects.luxe.title"),
-    desc: t("projects.luxe.desc"),
-    img: img2,
-    tags: t("projects.luxe.tags").split(", "),
-    link: "#",
-  },
-  {
-    id: "03",
     title: t("projects.ether.title"),
     desc: t("projects.ether.desc"),
     img: img3,
@@ -45,13 +33,29 @@ const projects: Project[] = [
     link: "#",
   },
   {
+    id: "02",
+    title: t("projects.nexus.title"),
+    desc: t("projects.nexus.desc"),
+    img: img6,
+    tags: t("projects.nexus.tags").split(", "),
+    link: "https://up-task-frontend-cyan.vercel.app",
+  },
+  {
+    id: "03",
+    title: t("projects.luxe.title"),
+    desc: t("projects.luxe.desc"),
+    img: img5,
+    tags: t("projects.luxe.tags").split(", "),
+    link: "https://ai-pdf-insights.web.app",
+  },
+  {
     id: "04",
     title: t("projects.hiring.title"),
     desc: t("projects.hiring.desc"),
     img: img4,
     tags: t("projects.hiring.tags").split(", "),
-    link: "#",
-  }
+    link: "https://jesusatao96.github.io/",
+  },
 ];
 ---
 
@@ -66,46 +70,60 @@ const projects: Project[] = [
   </header>
 
   <div class="flex flex-col gap-24 sm:gap-32">
-    {projects.map((project, index) => (
-      <article 
-        class="group grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center"
-        data-reveal="fade-up"
-      >
-        <div class="order-2 lg:order-1">
-          <header class="mb-6">
-            <span class="font-mono text-primary-container text-[10px] mb-3 block uppercase tracking-[0.2em] font-bold">
-              {t("projects.case_study")} #{project.id}
-            </span>
-            <h3 class="text-3xl sm:text-4xl font-headline font-bold mb-4 tracking-tight group-hover:text-primary-container transition-colors duration-300">
-              {project.title}
-            </h3>
-            <div class="flex flex-wrap gap-2 mb-6">
-              {project.tags.map(tag => (
-                <span class="px-3 py-1 rounded-full border border-outline/20 text-[10px] font-mono tracking-widest uppercase text-on-surface/70">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </header>
-          
-          <p class="text-on-surface/80 text-base leading-relaxed max-w-xl">
-            {project.desc}
-          </p>
-        </div>
+    {
+      projects.map((project, index) => (
+        <article
+          class="group grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center"
+          data-reveal="fade-up"
+        >
+          <div class="order-2 lg:order-1">
+            <header class="mb-6">
+              <span class="font-mono text-primary-container text-[10px] mb-3 block uppercase tracking-[0.2em] font-bold">
+                {t("projects.case_study")} #{project.id}
+              </span>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block"
+              >
+                <h3 class="text-3xl sm:text-4xl font-headline font-bold mb-4 tracking-tight group-hover:text-primary-container transition-colors duration-300">
+                  {project.title}
+                </h3>
+              </a>
+              <div class="flex flex-wrap gap-2 mb-6">
+                {project.tags.map((tag) => (
+                  <span class="px-3 py-1 rounded-full border border-outline/20 text-[10px] font-mono tracking-widest uppercase text-on-surface/70">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </header>
 
-        <div class="order-1 lg:order-2 relative aspect-[16/9] overflow-hidden rounded-sm bg-surface-container-high">
-          <Image
-            src={project.img}
-            alt={project.title}
-            width={1200}
-            height={675}
-            class="w-full h-full object-cover grayscale-[0.2] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-            loading="lazy"
-            decoding="async"
-          />
-          <div class="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none"></div>
-        </div>
-      </article>
-    ))}
+            <p class="text-on-surface/80 text-base leading-relaxed max-w-xl">
+              {project.desc}
+            </p>
+          </div>
+
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="order-1 lg:order-2 relative aspect-[16/9] overflow-hidden rounded-sm bg-surface-container-high block"
+          >
+            <Image
+              src={project.img}
+              alt={project.title}
+              width={1200}
+              height={675}
+              class="w-full h-full object-cover grayscale-[0.2] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none" />
+          </a>
+        </article>
+      ))
+    }
   </div>
 </section>
